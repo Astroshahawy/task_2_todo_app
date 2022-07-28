@@ -7,6 +7,10 @@ A new Flutter project.
 ## Screenshots
 
 ## Board pages:
+<img src="https://user-images.githubusercontent.com/20980869/181479443-c263a463-5962-4db3-b9fd-02a73afa3753.jpg" 
+     width="270" 
+     height="540" />
+     
 ![1](https://user-images.githubusercontent.com/20980869/181479443-c263a463-5962-4db3-b9fd-02a73afa3753.jpg)
 ![2](https://user-images.githubusercontent.com/20980869/181479475-407c23b9-a264-40aa-975b-a98bb0763f8f.jpg)
 ![3](https://user-images.githubusercontent.com/20980869/181479491-327383a1-f052-42f6-8cd0-d130e23d6482.jpg)
