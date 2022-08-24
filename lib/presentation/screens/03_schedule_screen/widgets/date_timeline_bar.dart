@@ -18,7 +18,7 @@ class DateTimelineBar extends StatelessWidget {
             DateTime.now(),
             height: 85,
             selectedTextColor: Colors.white,
-            selectionColor: kButtonColor,
+            selectionColor: AppColors.kButtonColor,
             initialSelectedDate: DateTime.now(),
             dayTextStyle: const TextStyle(
               fontSize: 16,

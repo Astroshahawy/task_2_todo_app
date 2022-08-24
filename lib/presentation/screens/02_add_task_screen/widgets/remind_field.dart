@@ -13,7 +13,7 @@ class RemindField extends StatelessWidget {
       isSmallMarginRight: true,
       child: DropdownButtonFormField(
         onChanged: (String? value) {
-          TasksBloc.get(context).remindValue = value!;
+          TasksBloc.get(context).selectedRemindValue = value!;
           TasksBloc.get(context).changeRemindValue();
         },
         elevation: 4,

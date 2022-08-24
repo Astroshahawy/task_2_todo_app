@@ -44,18 +44,18 @@ class MyApp extends StatelessWidget {
         ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-            primary: kButtonColor,
+            primary: AppColors.kButtonColor,
           ),
         ),
         timePickerTheme: const TimePickerThemeData().copyWith(
-          dialHandColor: kButtonColor,
-          hourMinuteTextColor: kButtonColor,
-          dayPeriodTextColor: kButtonColor,
-          entryModeIconColor: kButtonColor,
+          dialHandColor: AppColors.kButtonColor,
+          hourMinuteTextColor: AppColors.kButtonColor,
+          dayPeriodTextColor: AppColors.kButtonColor,
+          entryModeIconColor: AppColors.kButtonColor,
           helpTextStyle: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 18,
-            color: kButtonColor,
+            color: AppColors.kButtonColor,
           ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),

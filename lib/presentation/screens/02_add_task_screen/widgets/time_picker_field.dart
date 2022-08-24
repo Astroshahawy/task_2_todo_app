@@ -18,7 +18,7 @@ class TimePickerField extends StatelessWidget {
             onTap: () async {
               TasksBloc.get(context).selectedStartTime = await showTimePicker(
                 context: context,
-                initialTime: const TimeOfDay(hour: 00, minute: 00),
+                initialTime: TasksBloc.get(context).selectedStartTime!,
               );
               TasksBloc.get(context).changeStartTime();
             },
@@ -52,7 +52,7 @@ class TimePickerField extends StatelessWidget {
             onTap: () async {
               TasksBloc.get(context).selectedEndTime = await showTimePicker(
                 context: context,
-                initialTime: const TimeOfDay(hour: 00, minute: 00),
+                initialTime: TasksBloc.get(context).selectedEndTime!,
               );
               TasksBloc.get(context).changeEndTime();
             },

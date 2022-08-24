@@ -93,7 +93,7 @@ class ActionsRow extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () async {
-              await Navigator.of(context).pushNamed(scheduleScreen);
+              await Navigator.of(context).pushNamed(AppRoutes.scheduleScreen);
               TasksBloc.get(context).fetchAllData();
             },
             child: Container(

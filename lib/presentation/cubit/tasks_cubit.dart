@@ -44,42 +44,30 @@ class TasksBloc extends Cubit<TasksState> {
 
   TextEditingController taskTitleController = TextEditingController();
   final DateTime dateTimeNow = DateTime.now();
-  late DateTime formattedDateTimeNow =
-      DateTime(dateTimeNow.year, dateTimeNow.month, dateTimeNow.day, 00, 00);
   DateTime? selectedDate = DateTime.now();
   late String formattedDate = DateFormat('dd-MM-yyyy').format(dateTimeNow);
-  TimeOfDay? selectedStartTime;
-  late String formattedStartTime = DateFormat.jm().format(formattedDateTimeNow);
-  late String comparableStartTime = convertToHm(dateTime: formattedDateTimeNow);
-  TimeOfDay? selectedEndTime;
-  late String formattedEndTime = DateFormat.jm().format(formattedDateTimeNow);
-  late String comparableEndTime = convertToHm(dateTime: formattedDateTimeNow);
-  Color selectedColor = Colors.red;
-  late int color = selectedColor.value;
-  String? remindValue;
-  int remind = 0;
-
-  void validateTask({required context}) {
-    if (taskTitleController.text.isEmpty) {
-      emit(TasksErrorState(error: 'Please enter a task title'));
-      return;
-    } else if (comparableStartTime.compareTo(comparableEndTime) > 0 ||
-        comparableStartTime == comparableEndTime) {
-      emit(TasksErrorState(error: 'Please check start time and end time'));
-      return;
-    }
-    insertTask();
-    Navigator.pop(context);
-  }
-
-  void changeRemindValue() {
-    remind = int.tryParse(remindValue!) ?? 0;
-  }
-
-  void changeColor() {
-    color = selectedColor.value;
-    emit(TaskColorChanged());
-  }
+  TimeOfDay? selectedStartTime = TimeOfDay.now();
+  late String formattedStartTime = DateFormat.jm().format(dateTimeNow);
+  late String comparableStartTime = convertToHm(dateTime: dateTimeNow);
+  late TimeOfDay? selectedEndTime = TimeOfDay.fromDateTime(
+    dateTimeNow.add(
+      const Duration(minutes: 1),
+    ),
+  );
+  late String formattedEndTime = DateFormat.jm().format(
+    dateTimeNow.add(
+      const Duration(minutes: 1),
+    ),
+  );
+  late String comparableEndTime = convertToHm(
+    dateTime: dateTimeNow.add(
+      const Duration(minutes: 1),
+    ),
+  );
+  Color selectedTaskColor = Colors.red;
+  late int taskColor = selectedTaskColor.value;
+  String? selectedRemindValue;
+  late int remindValue = 0;
 
   void changeDate() {
     if (selectedDate != null) {
@@ -101,7 +89,9 @@ class TasksBloc extends Cubit<TasksState> {
             selectedStartTime!.hour, selectedStartTime!.minute),
       );
       emit(TaskStartTimeChanged());
+      return;
     }
+    selectedStartTime ??= TimeOfDay.fromDateTime(dateTimeNow);
   }
 
   void changeEndTime() {
@@ -115,19 +105,48 @@ class TasksBloc extends Cubit<TasksState> {
             selectedEndTime!.hour, selectedEndTime!.minute),
       );
       emit(TaskEndTimeChanged());
+      return;
     }
+    selectedEndTime ??= TimeOfDay.fromDateTime(
+      dateTimeNow.add(
+        const Duration(minutes: 1),
+      ),
+    );
+  }
+
+  void changeColor() {
+    taskColor = selectedTaskColor.value;
+    emit(TaskColorChanged());
+  }
+
+  void changeRemindValue() {
+    remindValue = int.tryParse(selectedRemindValue!) ?? 0;
+  }
+
+  void validateTask({required BuildContext context}) {
+    if (taskTitleController.text.isEmpty ||
+        taskTitleController.text.trim() == '') {
+      emit(TasksErrorState(error: 'Please enter a task title'));
+      return;
+    } else if (comparableStartTime.compareTo(comparableEndTime) > 0 ||
+        comparableStartTime == comparableEndTime) {
+      emit(TasksErrorState(error: 'Please check start time and end time'));
+      return;
+    }
+    insertTask();
+    Navigator.pop(context);
   }
 
   late NotificationServices _notificationServices;
   Future<void> insertTask() async {
     final Database database = await initDatabase();
     Task _task = Task(
-      title: taskTitleController.text,
+      title: taskTitleController.text.trim(),
       date: formattedDate,
       startTime: formattedStartTime,
       endTime: formattedEndTime,
-      color: color,
-      remind: remind,
+      color: taskColor,
+      remind: remindValue,
       isCompleted: false,
       isFavorite: false,
     );
@@ -293,11 +312,11 @@ class TasksBloc extends Cubit<TasksState> {
     return tasks;
   }
 
-  List<Task> fetchScheduleTasksByDate(List<Task> tasks) {
-    return sortTasks(tasks)
+  List<Task> fetchScheduleTasksByDate() {
+    return sortTasks(allTasks)
         .where((task) =>
-            task.date.split('-').join('') ==
-            DateFormat('ddMMyyyy').format(datePickerSelectedDate))
+            task.date ==
+            DateFormat('dd-MM-yyyy').format(datePickerSelectedDate))
         .toList();
   }
 
@@ -306,7 +325,7 @@ class TasksBloc extends Cubit<TasksState> {
     await notificationServices.initializeNotification();
     notificationServices.onNotifications.stream.listen(
       (payload) async {
-        await Navigator.pushNamed(context, scheduleScreen);
+        await Navigator.pushNamed(context, AppRoutes.scheduleScreen);
         fetchAllData();
       },
     );

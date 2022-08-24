@@ -13,7 +13,7 @@ class DatePickerField extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        TasksBloc.get(context).selectedDate = await showDatePicker(
+        TasksBloc.get(context).selectedDate = (await showDatePicker(
           context: context,
           initialEntryMode: DatePickerEntryMode.calendarOnly,
           initialDate: TasksBloc.get(context).selectedDate!,
@@ -25,14 +25,14 @@ class DatePickerField extends StatelessWidget {
             return Theme(
               data: Theme.of(context).copyWith(
                 colorScheme: const ColorScheme.light(
-                  primary: kButtonColor,
-                  onSurface: kButtonColor,
+                  primary: AppColors.kButtonColor,
+                  onSurface: AppColors.kButtonColor,
                 ),
               ),
               child: child!,
             );
           },
-        );
+        ));
         TasksBloc.get(context).changeDate();
       },
       child: FieldSection(

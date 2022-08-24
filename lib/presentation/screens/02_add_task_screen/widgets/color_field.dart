@@ -32,11 +32,11 @@ class ColorField extends StatelessWidget {
                 ),
               ),
               content: BlockPicker(
-                availableColors: pickerColors,
-                pickerColor: TasksBloc.get(context).selectedColor,
+                availableColors: AppColors.pickerColors,
+                pickerColor: TasksBloc.get(context).selectedTaskColor,
                 onColorChanged: (Color color) {
                   Navigator.of(context).pop();
-                  TasksBloc.get(context).selectedColor = color;
+                  TasksBloc.get(context).selectedTaskColor = color;
                 },
               ),
             ),
@@ -48,7 +48,7 @@ class ColorField extends StatelessWidget {
             return Container(
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: TasksBloc.get(context).selectedColor,
+                color: TasksBloc.get(context).selectedTaskColor,
               ),
             );
           },

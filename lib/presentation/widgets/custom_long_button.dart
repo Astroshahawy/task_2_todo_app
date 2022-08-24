@@ -16,10 +16,6 @@ class CustomLongButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.zero,
-      // padding: const EdgeInsets.symmetric(horizontal: 40),
-      // height: 65,
-      // width: MediaQuery.of(context).size.width - 80,
-      // margin: const EdgeInsets.symmetric(horizontal: 40),
       child: ElevatedButton(
         onPressed: () {
           onPressed();
@@ -27,7 +23,7 @@ class CustomLongButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           minimumSize: Size(MediaQuery.of(context).size.width - 80,
               MediaQuery.of(context).size.height * 0.065),
-          primary: kButtonColor,
+          primary: AppColors.kButtonColor,
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20.0),

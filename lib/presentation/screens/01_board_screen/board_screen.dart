@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:task_2_todo_app/data/services/notification_services.dart';
+import 'package:task_2_todo_app/constants/constants.dart';
 import '../../cubit/tasks_cubit.dart';
 import 'widgets/tab_bar_pages_view.dart';
-import '../../../constants/constants.dart';
 
 import '../../widgets/custom_app_bar.dart';
 import '../../widgets/custom_long_button.dart';
@@ -43,7 +42,7 @@ class _BoardScreenState extends State<BoardScreen> {
             child: CustomLongButton(
               title: 'Add a task',
               onPressed: () async {
-                await Navigator.of(context).pushNamed(addTaskScreen);
+                await Navigator.of(context).pushNamed(AppRoutes.addTaskScreen);
                 TasksBloc.get(context).fetchAllData();
               },
             ),

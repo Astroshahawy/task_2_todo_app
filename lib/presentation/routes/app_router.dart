@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:task_2_todo_app/constants/constants.dart';
 import '../cubit/tasks_cubit.dart';
-import '../../constants/constants.dart';
 import '../screens/01_board_screen/board_screen.dart';
 import '../screens/02_add_task_screen/add_task_screen.dart';
 import '../screens/03_schedule_screen/schedule_screen.dart';
@@ -9,7 +9,7 @@ import '../screens/03_schedule_screen/schedule_screen.dart';
 class AppRouter {
   Route? generateRoutes(RouteSettings settings) {
     switch (settings.name) {
-      case initRoute:
+      case AppRoutes.initRoute:
         return MaterialPageRoute(
           settings: settings,
           builder: (context) => BlocProvider<TasksBloc>(
@@ -17,7 +17,7 @@ class AppRouter {
             child: const BoardScreen(),
           ),
         );
-      case addTaskScreen:
+      case AppRoutes.addTaskScreen:
         return MaterialPageRoute(
           settings: settings,
           builder: (context) => BlocProvider<TasksBloc>(
@@ -25,7 +25,7 @@ class AppRouter {
             child: const AddTaskScreen(),
           ),
         );
-      case scheduleScreen:
+      case AppRoutes.scheduleScreen:
         return MaterialPageRoute(
           settings: settings,
           builder: (context) => BlocProvider(

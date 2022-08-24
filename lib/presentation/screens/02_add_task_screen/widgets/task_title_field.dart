@@ -15,7 +15,7 @@ class TaskTitleSection extends StatelessWidget {
         style: TextStyle(
           color: Colors.grey.shade400,
         ),
-        cursorColor: kButtonColor,
+        cursorColor: AppColors.kButtonColor,
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: 'Enter a task title..',
