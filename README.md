@@ -1,4 +1,4 @@
-# task_2_todo_app
+# Task Manager (To-do Application)
 
 ## Screenshots
 
